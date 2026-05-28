@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<robot name="two_dof_arm">
+
+  <!-- World root -->
+  <link name="world"/>
+
+  <!-- Base puck -->
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.08"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.4 0.4 0.4 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="base_to_world" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <!-- Upper arm: cylinder lying along +X, length L1=0.5 -->
+  <link name="upper_arm">
+    <visual>
+      <origin xyz="0.25 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder length="0.5" radius="0.04"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.2 0.4 0.9 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="shoulder_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="upper_arm"/>
+    <origin xyz="0 0 0.05"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1416" upper="3.1416" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- Forearm: cylinder lying along +X, length L2=0.5 -->
+  <link name="forearm">
+    <visual>
+      <origin xyz="0.25 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder length="0.5" radius="0.035"/>
+      </geometry>
+      <material name="orange">
+        <color rgba="0.95 0.5 0.1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="elbow_joint" type="revolute">
+    <parent link="upper_arm"/>
+    <child link="forearm"/>
+    <origin xyz="0.5 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.1416" upper="3.1416" effort="10" velocity="2"/>
+  </joint>
+
+  <!-- End effector marker -->
+  <link name="end_effector">
+    <visual>
+      <geometry>
+        <sphere radius="0.05"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.9 0.1 0.1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="ee_joint" type="fixed">
+    <parent link="forearm"/>
+    <child link="end_effector"/>
+    <origin xyz="0.5 0 0"/>
+  </joint>
+
+</robot>
