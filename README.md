@@ -9,7 +9,7 @@ PyAutoGUI.
 This is a course robotics project. The webcam is the sensor, hand tracking is
 the computer vision layer, and ROS 2 is the middleware tying it together.
 
-<!---  video link  --->
+[Informal Demo Video](https://drive.google.com/file/d/1yPZRM4MoLib0qIEHfHauOtxVp-9QBJaj/view?usp=sharing)
 
 ## Features
 
